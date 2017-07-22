@@ -2,10 +2,9 @@ properties([disableConcurrentBuilds(), pipelineTriggers([])])
 
 node {
     def nodeVersion = '8.2.1'
-    def os = (sh('uname -s')).trim().toLowerCase()
-    def arch = (sh('uname -m')).trim()
+    def os = (sh(returnStdout: true, script: 'uname -s')).trim().toLowerCase()
+    def arch = (sh(returnStdout: true, script: 'uname -m')).trim()
     def artifactName = "node-${os}-${arch}-${nodeVersion}.tar.gz"
-
 
     stage('checkout') {
         checkout scm
