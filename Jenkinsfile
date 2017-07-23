@@ -20,7 +20,7 @@ node('nodejs-build') {
         }
 
         stage('build') {
-            sh "cd node-v${nodeVersion}/; ./configure --prefix=./dist; make"
+            sh "cd node-v${nodeVersion}/; ./configure --shared-openssl --prefix=./dist; make"
         }
 
         stage('package') {
