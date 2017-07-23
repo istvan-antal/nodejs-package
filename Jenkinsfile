@@ -10,7 +10,10 @@ node('nodejs-build') {
         checkout scm
     }
 
-    dir('build') {
+    sh 'mkdir /tmp/nodejs-build'
+    sh 'cp ../init.sh /tmp/nodejs-build/'
+
+    dir('/tmp/nodejs-build') {
         stage('download') {
             sh "curl -OL https://nodejs.org/dist/v${nodeVersion}/node-v${nodeVersion}.tar.gz"
         }
@@ -20,18 +23,19 @@ node('nodejs-build') {
         }
 
         stage('build') {
-            sh "cd node-v${nodeVersion}/; ./configure --shared-openssl --prefix=./dist; make"
+            sh "cd node-v${nodeVersion}/; ./configure --prefix=./dist; make"
         }
 
         stage('package') {
             dir('dist') {
-                sh 'cp ../../init.sh .'
-                sh "tar -czvf ../../${artifactName} ."
+                sh 'cp ../init.sh .'
+                sh "tar -czvf ../${artifactName} ."
             }
-        }
-    }
 
-    archiveArtifacts artifactName
+            archiveArtifacts artifactName
+        }
+        deleteDir()
+    }
 
     cleanWs cleanWhenFailure: false
 }
