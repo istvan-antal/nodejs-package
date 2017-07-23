@@ -24,12 +24,14 @@ node {
         }
 
         stage('package') {
-            sh 'cp ../init.sh .'
-            sh "tar -czvf ../../${artifactName} ."
+            dir('dist') {
+                sh 'cp ../../init.sh .'
+                sh "tar -czvf ../../${artifactName} ."
+            }
         }
     }
 
     archiveArtifacts artifactName
 
-    cleanWs()
+    cleanWs cleanWhenFailure: false
 }
