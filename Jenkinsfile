@@ -10,7 +10,7 @@ node('nodejs-build') {
         checkout scm
     }
 
-    sh 'mkdir /tmp/nodejs-build'
+    sh 'mkdir -p /tmp/nodejs-build'
     sh 'cp ./init.sh /tmp/nodejs-build/'
 
     dir('/tmp/nodejs-build') {
