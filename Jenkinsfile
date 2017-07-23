@@ -1,6 +1,6 @@
 properties([disableConcurrentBuilds(), pipelineTriggers([])])
 
-node {
+node('nodejs-build') {
     def nodeVersion = '8.2.1'
     def os = (sh(returnStdout: true, script: 'uname -s')).trim().toLowerCase()
     def arch = (sh(returnStdout: true, script: 'uname -m')).trim()
