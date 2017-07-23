@@ -23,7 +23,7 @@ node('nodejs-build') {
         }
 
         stage('build') {
-            sh "cd node-v${nodeVersion}/; ./configure --prefix=./dist; make"
+            sh "cd node-v${nodeVersion}/; ./configure --prefix=./dist; make; make install"
         }
 
         stage('package') {
