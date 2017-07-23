@@ -11,7 +11,7 @@ node('nodejs-build') {
     }
 
     sh 'mkdir /tmp/nodejs-build'
-    sh 'cp ../init.sh /tmp/nodejs-build/'
+    sh 'cp ./init.sh /tmp/nodejs-build/'
 
     dir('/tmp/nodejs-build') {
         stage('download') {
