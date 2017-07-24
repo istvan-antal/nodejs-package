@@ -27,9 +27,9 @@ node('nodejs-build') {
         }
 
         stage('package') {
-            dir('dist') {
-                sh 'cp ../init.sh .'
-                sh "tar -czvf ../${artifactName} ."
+            dir("node-v${nodeVersion}/dist") {
+                sh 'cp ../../init.sh .'
+                sh "tar -czvf ../../${artifactName} ."
             }
 
             archiveArtifacts artifactName
