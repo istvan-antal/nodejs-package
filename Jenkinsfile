@@ -4,7 +4,7 @@ node('nodejs-build') {
     def nodeVersion = '8.2.1'
     def os = (sh(returnStdout: true, script: 'uname -s')).trim().toLowerCase()
     def arch = (sh(returnStdout: true, script: 'uname -m')).trim()
-    def artifactName = "node-${os}-${arch}-${nodeVersion}.tar.gz"
+    def artifactName = "node-${nodeVersion}-${os}-${arch}.tar.gz"
 
     stage('checkout') {
         checkout scm
