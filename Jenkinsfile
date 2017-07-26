@@ -23,15 +23,12 @@ node('nodejs-build') {
         }
 
         stage('build') {
-            sh "cd node-v${nodeVersion}/; ./configure --prefix=./dist; make; make install"
+            sh "cd node-v${nodeVersion}/; ./configure --prefix=../nodejs; make; make install"
         }
 
         stage('package') {
-            dir("node-v${nodeVersion}/dist") {
-                sh 'cp ../../init.sh .'
-                sh "tar -czvf ../../${artifactName} ."
-            }
-
+            sh 'cp ./init.sh nodejs/'
+            sh "tar -czvf ../${artifactName} nodejs"
             archiveArtifacts artifactName
         }
         deleteDir()
