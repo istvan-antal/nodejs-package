@@ -29,8 +29,9 @@ node('nodejs-build') {
         stage('package') {
             sh 'cp ./init.sh nodejs/'
             sh "tar -czvf ${artifactName} nodejs"
-            archiveArtifacts artifactName
         }
+
+        archiveArtifacts artifactName
         deleteDir()
     }
 
